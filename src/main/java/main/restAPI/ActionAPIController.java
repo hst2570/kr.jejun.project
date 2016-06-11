@@ -13,11 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest")
 public class ActionAPIController {
+
     @Autowired
     private ActionRepository actionRepository;
 
     @RequestMapping("/action/{id}")
     public Action getAction(@PathVariable Long id){
         return actionRepository.findOne(id);
+    }
+
+    @RequestMapping("/action/add")
+    public Action addAction(Action action){
+        return actionRepository.save(action);
     }
 }

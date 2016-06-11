@@ -15,9 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest")
 public class CommentAPIController {
+
     @Autowired
     private CommentRepository commentRepository;
-
 
     @RequestMapping("/comment/{id}")
     public Comment getComment(@PathVariable Long id){
@@ -25,9 +25,12 @@ public class CommentAPIController {
     }
 
     @RequestMapping("/comment")
-    public List<Comment> getComment(){
+    public List<Comment> getComments(){
         return commentRepository.findAll();
     }
 
-
+    @RequestMapping("/comment/add")
+    public Comment addComment(Comment comment){
+        return commentRepository.save(comment);
+    }
 }

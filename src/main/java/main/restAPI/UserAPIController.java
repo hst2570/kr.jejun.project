@@ -13,12 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest")
 public class UserAPIController {
+
     @Autowired
     private UserRepository userRepository;
 
     @RequestMapping("/user/{id}")
     public User getUser(@PathVariable String id){
         return userRepository.findOne(id);
+    }
+
+    @RequestMapping("/user/add")
+    public User addUser(User user){
+        return userRepository.save(user);
     }
 
 }
