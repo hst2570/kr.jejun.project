@@ -14,7 +14,7 @@ public class UserContoller {
         2. 로그인
      */
     @RequestMapping("/signup")
-    public String signup(User user){
+    public String signup(){
         return "signup";
     }
 
