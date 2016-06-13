@@ -4,6 +4,7 @@ import main.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 /**
@@ -16,17 +17,17 @@ public class CommentController {
         2. 글 작성
      */
     @RequestMapping("/")
-    public String index(){
+    public String index(HttpSession session){
         return "index";
     }
 
     @RequestMapping("/comment")
-    public String comment(){
+    public String comment(HttpSession session){
         return "comment";
     }
 
     @RequestMapping("/comment/write")
-    public String commentWrite(){
+    public String commentWrite(HttpSession session){
         return "commentWrite";
     }
 

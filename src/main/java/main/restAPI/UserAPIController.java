@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by User on 2016-06-11.
  */
@@ -24,8 +26,16 @@ public class UserAPIController {
     }
 
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-    public User addUser(User user){
-        return userRepository.save(user);
+    public String addUser(HttpServletRequest request){
+        User user = new User();
+        user.setUserId(request.getParameter("userId"));
+        user.setDes(request.getParameter("des"));
+        user.setName(request.getParameter("name"));
+        user.setPassword(request.getParameter("password"));
+
+        user.setImage(request.getParameter("image"));
+        userRepository.save(user);
+        return "index";
     }
 
 }
