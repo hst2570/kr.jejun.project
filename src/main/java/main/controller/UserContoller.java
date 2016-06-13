@@ -6,9 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -51,7 +57,26 @@ public class UserContoller {
             }
         }
 
-        session.setAttribute("login", "fail");
+        session.setAttribute("login", null);
         return "signin";
+    }
+
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
+    public String addUser(HttpServletRequest request, @RequestParam("image") MultipartFile image) throws IOException {
+        User user = new User();
+        user.setUserId(request.getParameter("userId"));
+        user.setDes(request.getParameter("des"));
+        user.setName(request.getParameter("name"));
+        user.setPassword(request.getParameter("password"));
+
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("src/main/resources/image/" + image.getOriginalFilename()));
+        BufferedOutputStream outputStream = new BufferedOutputStream(fileOutputStream);
+        outputStream.write(image.getBytes());
+        outputStream.close();
+
+        user.setImage("src/main/resources/image/" + image.getOriginalFilename());
+
+        userRepository.save(user);
+        return "redirect:/";
     }
 }

@@ -5,6 +5,7 @@
     <title>로그인</title>
 </head>
 <body>
+<header th:include="fragment/header :: header"></header>
     <form action="signin/check" method="post">>
         <input type="text" name="userId" />
         <input type="text" name="password" />

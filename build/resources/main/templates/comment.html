@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
 
     <title>댓글작성</title>
 </head>
 <body>
+    <header th:include="fragment/header :: header"></header>
     <form>
         <input type="text" name="content" />
+        <input type="hidden" value=${session.getId} name="userId"/>
         <input type="submit" value="저장" />
         <a>취소</a>
     </form>

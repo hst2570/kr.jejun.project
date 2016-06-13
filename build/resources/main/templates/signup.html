@@ -5,14 +5,27 @@
     <title>회원가입</title>
 </head>
 <body>
-    <form action="rest/user/add" method="post">
-        id<input type="text" name="userId" />
-        password<input type="text" name="password" />
-        name<input type="text" name="name" />
-        des<input type="text" name="des" />
-        image<input type="text" name="image" />
-        <input type="submit" value="회원가입" />
-        <a>취소</a>
-    </form>
+    <header th:include="fragment/header :: header"></header>
+
+    <div th:if="${session.login == null}">
+        <form action="user/add" method="post" enctype="multipart/form-data" class="userinfo">
+            id<input type="text" name="userId" />
+            password<input type="text" name="password" />
+            name<input type="text" name="name" />
+            des<input type="text" name="des" />
+            image<input type="file" name="image" />
+            <input type="submit" value="회원가입" />
+            <a>취소</a>
+        </form>
+    </div>
+
+    <!--<div th:if="${session.login == 'ok'}">-->
+        <!--<form action="user/add" method="post" id="userinfo" enctype="multipart/form-data" class="userinfo">-->
+            <!--id<input type="text" name="userId" value=${session.getId}/>-->
+
+            <!--<input type="submit" value="수정" />-->
+            <!--<a>취소</a>-->
+        <!--</form>-->
+    <!--</div>-->
 </body>
 </html>

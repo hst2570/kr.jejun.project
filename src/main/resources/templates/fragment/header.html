@@ -12,6 +12,7 @@
 
         <div th:if="${session.login == 'ok'}">
             <a href="mod?userId=${session.getId}">프로필수정</a>
+            <input type="hidden" value="${session.getId}" id="user" />
         </div>
 
         <a href="commentWrite">글쓰기</a>
