@@ -36,11 +36,11 @@ public class ActionController {
         List<Action> action = actionRepository.findAll();
 
         for(int i = 0; i < action.size(); i++){
-            if(action.get(i).getUser().getUserId().equals(user) && action.get(i).getComment().equals(comment) &&
+            if(action.get(i).getUserId().equals(user) && action.get(i).getCommentId().equals(comment) &&
                     action.get(i).getType().equals(type)){ // 같은 글에 좋아요 또는 싫어요를 중복으로 누를 경우 취소된다.
                 actionRepository.delete(action.get(i).getActionId());
                 return "redirect:/";
-            }else if(action.get(i).getUser().getUserId().equals(user) && action.get(i).getComment().equals(comment) &&
+            }else if(action.get(i).getUserId().equals(user) && action.get(i).getCommentId().equals(comment) &&
                     action.get(i).getType() != type){ // 같은 글에 좋아요 싫어요를 두번 누를경우
                 model.addAttribute("actionCheck", "overlap");
                 return "redirect:/";
@@ -49,8 +49,8 @@ public class ActionController {
 
         Action action1 = new Action();
 
-        action1.setComment(commentRepository.findOne(comment).getCommentId());
-        action1.setUser(userRepository.findOne(user));
+        action1.setCommentId(commentRepository.findOne(comment).getCommentId());
+        action1.setUserId(userRepository.findOne(user).getUserId());
         action1.setType(type);
 
         actionRepository.save(action1);

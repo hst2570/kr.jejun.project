@@ -31,6 +31,10 @@ public class Application extends WebMvcConfigurerAdapter {
         if (!registry.hasMappingForPattern("/static/**")) {
             registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         }
+
+        if (!registry.hasMappingForPattern("/image/**")) {
+            registry.addResourceHandler("/image/**").addResourceLocations("classpath:/image/");
+        }
     }
 
     @Bean
