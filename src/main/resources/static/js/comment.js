@@ -1,4 +1,4 @@
-var url = "http://localhost:8080/rest/comment";
+var url = "http://localhost:8080/rest/comment/1";
 console.log("hello");
 var xhr = new XMLHttpRequest();
   xhr.open('GET', url);
@@ -36,7 +36,7 @@ var xhr = new XMLHttpRequest();
                 var comments = document.querySelector('#comments');
                 var user = document.querySelector('#user');
 
-                for(var i = comment.length; i =< 0; i--){
+                for(var i = comment.length; i <= 0; i--){
                     if(comment[i].user.userId === user.value){
                     comments.innerHTML += "<tr><td><img src="+comment[i].user.image+" width=100 height=100></td>"+
                                                           "<td>"+comment[i].user.userId+"</td>"+

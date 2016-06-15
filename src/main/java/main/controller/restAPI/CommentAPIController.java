@@ -19,14 +19,27 @@ public class CommentAPIController {
     @Autowired
     private CommentRepository commentRepository;
 
-    @RequestMapping("/comment/{id}")
-    public Comment getComment(@PathVariable Long id){
-        return commentRepository.findOne(id);
-    }
 
-    @RequestMapping("/comment")
-    public List<Comment> getComments(){
-        return commentRepository.findAll();
+    @RequestMapping("/comment/{page}")
+    public Comment[] getComments(@PathVariable int page) {
+        Comment[] comment = new Comment[10];
+
+        int temp = 0;
+
+        for(int i = 0 ; i < page*10 ; i++){
+            comment[i] = new Comment();
+            System.out.println(comment[i].getCommentId());
+
+            while (comment[i].getCommentId().equals(null)){
+                comment[i] = commentRepository.findOne((long) temp);
+                temp ++;
+            }
+
+            System.out.println(temp);
+            System.out.println(i);
+        }
+
+        return comment;
     }
 
     @RequestMapping("/comment/add")
