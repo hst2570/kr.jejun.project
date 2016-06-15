@@ -86,7 +86,7 @@ public class UserContoller {
         outputStream.write(image.getBytes());
         outputStream.close();
 
-        user.setImage("src/main/resources/image/" + image.getOriginalFilename());
+        user.setImage("src/main/resources/image/" + user.getUserId());
 
         userRepository.save(user);
         return "redirect:/";
