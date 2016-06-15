@@ -14,7 +14,7 @@ public class Comment {
      */
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private Long commentId;
 
     @JoinColumn(name = "user_id")
     @ManyToOne(optional=false)
@@ -22,12 +22,12 @@ public class Comment {
     private String date;
     private String content;
 
-    public Long getId() {
-        return id;
+    public Long getCommentId() {
+        return commentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
     public User getUser() {

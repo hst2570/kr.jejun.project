@@ -13,22 +13,22 @@ public class Action {
      - id, comment, type, user
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long actionId;
     private Long type;
-    @JoinColumn(name = "id", referencedColumnName="id", insertable=false, updatable=false)
+    @JoinColumn(name = "commentId", referencedColumnName="commentId", insertable=false, updatable=false)
     @ManyToOne(optional=false)
     private Comment comment;
     @JoinColumn(name = "userId", referencedColumnName="userId", insertable=false, updatable=false)
     @ManyToOne(optional=false)
     private User user;
 
-    public Long getId() {
-        return id;
+    public Long getActionId() {
+        return actionId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setActionId(Long actionId) {
+        this.actionId = actionId;
     }
 
     public Long getType() {
