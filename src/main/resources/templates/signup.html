@@ -8,7 +8,7 @@
     <header th:include="fragment/header :: header"></header>
 
     <div th:if="${session.login == null}">
-        <form action="user/add" method="post" enctype="multipart/form-data" class="userinfo">
+        <form action="../user/add" method="post" enctype="multipart/form-data" class="userinfo">
             id<input type="text" name="userId" />
             password<input type="text" name="password" />
             name<input type="text" name="name" />
@@ -19,13 +19,16 @@
         </form>
     </div>
 
-    <!--<div th:if="${session.login == 'ok'}">-->
-        <!--<form action="user/add" method="post" id="userinfo" enctype="multipart/form-data" class="userinfo">-->
-            <!--id<input type="text" name="userId" value=${session.getId}/>-->
-
-            <!--<input type="submit" value="수정" />-->
-            <!--<a>취소</a>-->
-        <!--</form>-->
-    <!--</div>-->
+    <div th:if="${session.login == 'ok'}">
+        <form action="../user/add" method="post" id="userinfo" enctype="multipart/form-data" class="userinfo">
+            id<input type="text" name="userId" th:value="${session.getId}" />
+            password<input type="text" name="password" />
+            name<input type="text" name="name" th:value="${userName}" />
+            des<input type="text" name="des" th:value="${userDes}"/>
+            image<input type="file" name="image" th:value="${userImage}"/>
+            <input type="submit" value="수정" />
+            <a>취소</a>
+        </form>
+    </div>
 </body>
 </html>

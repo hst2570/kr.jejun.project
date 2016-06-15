@@ -7,9 +7,9 @@
 </head>
 <body>
     <header th:include="fragment/header :: header"></header>
-    <form>
-        <input type="text" name="content" />
-        <input type="hidden" value=${session.getId} name="userId"/>
+    <form action="../comment/add" method="post">
+        <textarea type="text" name="content"></textarea>
+        <input type="hidden" th:value="${session.getId}" name="userId"/>
         <input type="submit" value="저장" />
         <a>취소</a>
     </form>

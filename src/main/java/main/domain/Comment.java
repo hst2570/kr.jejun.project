@@ -13,8 +13,9 @@ public class Comment {
      - id, user, date, content
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
     @JoinColumn(name = "user_id")
     @ManyToOne(optional=false)
     private User user;

@@ -4,6 +4,8 @@ import main.domain.User;
 import main.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +40,16 @@ public class UserContoller {
     @RequestMapping("/signin")
     public String signinMain(HttpSession session){
         return "signin";
+    }
+
+    @RequestMapping("/user/mod/{id}")
+    public String updateUser(@PathVariable String id, Model model){
+        User user = userRepository.findOne(id);
+        model.addAttribute("userName", user.getName());
+        model.addAttribute("userDes", user.getDes());
+        model.addAttribute("userImage", user.getImage());
+
+        return "signup";
     }
 
     @RequestMapping(value = "/signin/check", method = RequestMethod.POST)
