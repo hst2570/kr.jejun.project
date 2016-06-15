@@ -1,4 +1,4 @@
-package main.restAPI;
+package main.controller.restAPI;
 
 import main.domain.Comment;
 import main.repository.CommentRepository;

@@ -1,5 +1,5 @@
 var url = "http://localhost:8080/rest/comment";
-
+console.log("hello");
 var xhr = new XMLHttpRequest();
   xhr.open('GET', url);
   xhr.onreadystatechange = function(){
@@ -17,20 +17,15 @@ var xhr = new XMLHttpRequest();
                 var action = JSON.parse(data2);
                 var good = new Array();
                 var bad = new Array();
-                console.log(action);
                 for(var i = 0; i < action.length; i++){
                     if(action[i].type == 1){
-                        var temp = action[i].comment.commentId;
-                        if(good[temp]==null) good[temp]=0;
-                        good[temp] = good[temp] + 1;
-                        console.log(action[i].comment.commentId);
-                        console.log(good[temp]);
+                        var temp = action[i].comment.commentId; // 해당되는 코멘트 id를 받아옴
+                        if(good[temp]==null) good[temp]=0; // 초기화부분
+                        good[temp] = good[temp] + 1; // 카운트
                     }else{
                         var temp = action[i].comment.commentId;
                         if(bad[temp]==null) bad[temp]=0;
                         bad[temp] = bad[temp] + 1;
-                        console.log(action[i].comment.commentId);
-                        console.log(bad[temp]);
                     }
                 }
                 //---------------------------- 좋아요 반대 갯수---------------------------
@@ -44,8 +39,8 @@ var xhr = new XMLHttpRequest();
                     comments.innerHTML += "<tr><td>"+comment[i].user.image+"</td>"+
                                                           "<td>"+comment[i].user.userId+"</td>"+
                                                           "<td>"+comment[i].content+"</td>"+
-                                                          "<td>좋아요("+good[comment[i].commentId]+")</td>"+
-                                                          "<td>싫어요("+bad[comment[i].commentId]+")</td>"+
+                                                          "<td><a href=../action/1/"+user.value+"/"+comment[i].commentId+">좋아요("+good[comment[i].commentId]+")</a></td>"+
+                                                          "<td><a href=../action/0/"+user.value+"/"+comment[i].commentId+">싫어요("+bad[comment[i].commentId]+")</a></td>"+
                                                           "<td><a href=../comment/delete/"+comment[i].commentId+">삭제</a></td>"+
                                                           "<td>"+comment[i].date+"</td>"+
                                                           "</tr>";
@@ -53,8 +48,8 @@ var xhr = new XMLHttpRequest();
                         comments.innerHTML += "<tr><td>"+comment[i].user.image+"</td>"+
                                                           "<td>"+comment[i].user.userId+"</td>"+
                                                           "<td>"+comment[i].content+"</td>"+
-                                                          "<td>좋아요("+good[comment[i].commentId]+")</td>"+
-                                                          "<td>싫어요("+bad[comment[i].commentId]+")</td>"+
+                                                          "<td><a href=../action/1/"+user.value+"/"+comment[i].commentId+">좋아요("+good[comment[i].commentId]+")</a></td>"+
+                                                          "<td><a href=../action/0/"+user.value+"/"+comment[i].commentId+">싫어요("+bad[comment[i].commentId]+")</a></td>"+
                                                           "<td></td>"+
                                                           "<td>"+comment[i].date+"</td>"+
                                                           "</tr>";
@@ -65,13 +60,6 @@ var xhr = new XMLHttpRequest();
                 }
            }
            xhr2.send();
-
-
-
-
-
-
-
         }
     }
   xhr.send();
