@@ -16,9 +16,7 @@ public class Action {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long actionId;
     private Long type;
-    @JoinColumn(name = "commentId", referencedColumnName="commentId", insertable=false, updatable=false)
-    @ManyToOne(optional=false)
-    private Comment comment;
+    private Long comment;
     @JoinColumn(name = "userId", referencedColumnName="userId", insertable=false, updatable=false)
     @ManyToOne(optional=false)
     private User user;
@@ -39,11 +37,11 @@ public class Action {
         this.type = type;
     }
 
-    public Comment getComment() {
+    public Long getComment() {
         return comment;
     }
 
-    public void setComment(Comment comment) {
+    public void setComment(Long comment) {
         this.comment = comment;
     }
 
