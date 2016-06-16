@@ -3,6 +3,7 @@ package main.controller;
 import main.domain.Comment;
 import main.repository.CommentRepository;
 import main.repository.UserRepository;
+import main.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +23,8 @@ public class CommentController {
         1. 로그인창
         2. 글 작성
      */
-
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private CommentRepository CommentRepository;
+    private CommentService commentService;
 
     @RequestMapping("/")
     public String index(HttpSession session){
@@ -35,7 +32,7 @@ public class CommentController {
     }
 
     @RequestMapping("/comment")
-    public String commentWrite(HttpSession session){
+    public String checkUser(HttpSession session){
         if (session.getId() == null){
             return "singup";
         }
@@ -44,21 +41,14 @@ public class CommentController {
 
     @RequestMapping(value = "/comment/add", method = RequestMethod.POST)
     public String addComment(HttpServletRequest request, HttpSession session){
-        Comment comment = new Comment();
-        long time = System.currentTimeMillis();
-
-        comment.setContent(request.getParameter("content"));
-        comment.setDate(Long.toString(time));
-        comment.setUser(userRepository.findOne(request.getParameter("userId")));
-
-        CommentRepository.save(comment);
+        commentService.addComment(request);
 
         return "redirect:/";
     }
 
     @RequestMapping(value = "/comment/delete/{id}")
     public String deleteComment(@PathVariable Long id, HttpSession session){
-        CommentRepository.delete(id);
+        commentService.deleteComment(id);
 
         return "redirect:/";
     }

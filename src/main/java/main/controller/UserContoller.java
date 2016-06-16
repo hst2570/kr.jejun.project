@@ -81,12 +81,12 @@ public class UserContoller {
         user.setName(request.getParameter("name"));
         user.setPassword(request.getParameter("password"));
 
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("src/main/resources/image/" + image.getOriginalFilename()));
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("src/main/resources/static/image/" + image.getOriginalFilename()));
         BufferedOutputStream outputStream = new BufferedOutputStream(fileOutputStream);
         outputStream.write(image.getBytes());
         outputStream.close();
 
-        user.setImage("src/main/resources/image/" + user.getUserId());
+        user.setImage("static/image/" + image.getOriginalFilename());
 
         userRepository.save(user);
         return "redirect:/";
