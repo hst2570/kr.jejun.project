@@ -20,7 +20,7 @@
     </div>
 
     <div th:if="${session.login == 'ok'}">
-        <form action="../user/add" method="post" id="userinfo" enctype="multipart/form-data" class="userinfo">
+        <form action=".../user/add" method="post" id="userinfo" enctype="multipart/form-data" class="userinfo">
             id<input type="text" name="userId" th:value="${session.getId}" />
             password<input type="text" name="password" />
             name<input type="text" name="name" th:value="${userName}" />

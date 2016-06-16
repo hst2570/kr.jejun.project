@@ -32,7 +32,7 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public void deleteComment(@PathVariable Long id) {
+    public void deleteComment(Long id) {
         CommentRepository.delete(id);
     }
 

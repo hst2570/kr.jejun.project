@@ -9,5 +9,5 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface CommentService {
     public void addComment(HttpServletRequest request);
-    public void deleteComment(@PathVariable Long id);
+    public void deleteComment(Long id);
 }

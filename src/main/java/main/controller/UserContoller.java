@@ -2,6 +2,7 @@ package main.controller;
 
 import main.domain.User;
 import main.repository.UserRepository;
+import main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +29,8 @@ public class UserContoller {
         1. 회원가입 저장
         2. 로그인
      */
-
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @RequestMapping("/signup")
     public String signup(){
@@ -44,51 +44,19 @@ public class UserContoller {
 
     @RequestMapping("/user/mod/{id}")
     public String updateUser(@PathVariable String id, Model model){
-        User user = userRepository.findOne(id);
-        model.addAttribute("userName", user.getName());
-        model.addAttribute("userDes", user.getDes());
-        model.addAttribute("userImage", user.getImage());
+        userService.updateUser(id, model);
 
         return "signup";
     }
 
     @RequestMapping(value = "/signin/check", method = RequestMethod.POST)
     public String signin(HttpSession session, HttpServletRequest request){
-        List<User> user =  userRepository.findAll();
-        System.out.println(request.getParameter("userId"));
-        System.out.println(request.getParameter("password"));
-
-        for(int i = 0; i < user.size(); i++){
-            if(user.get(i).getUserId().equals(request.getParameter("userId"))
-                    && user.get(i).getPassword().equals(request.getParameter("password"))){
-                System.out.println("로그인 성공");
-
-                session.setAttribute("getId", request.getParameter("userId"));
-                session.setAttribute("login", "ok");
-                return "redirect:/";
-            }
-        }
-
-        session.setAttribute("login", null);
-        return "signin";
+        return userService.signin(session, request);
     }
 
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
     public String addUser(HttpServletRequest request, @RequestParam("image") MultipartFile image) throws IOException {
-        User user = new User();
-        user.setUserId(request.getParameter("userId"));
-        user.setDes(request.getParameter("des"));
-        user.setName(request.getParameter("name"));
-        user.setPassword(request.getParameter("password"));
-
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("src/main/resources/static/image/" + image.getOriginalFilename()));
-        BufferedOutputStream outputStream = new BufferedOutputStream(fileOutputStream);
-        outputStream.write(image.getBytes());
-        outputStream.close();
-
-        user.setImage("static/image/" + image.getOriginalFilename());
-
-        userRepository.save(user);
+        userService.addUser(request, image);
         return "redirect:/";
     }
 }
