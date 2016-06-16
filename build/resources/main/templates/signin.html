@@ -6,9 +6,12 @@
 </head>
 <body>
 <header th:include="fragment/header :: header"></header>
-    <form action="../signin/check" method="post">>
-        <input type="text" name="userId" />
-        <input type="text" name="password" />
+    <div th:if="${session.login == 'fail'}">
+        <p>아이디 또는 비밀번호를 확인해주세요.</p>
+    </div>
+    <form action="../signin/check" method="post">
+        id<input type="text" name="userId" />
+        password<input type="text" name="password" />
         <input type="submit" value="로그인" />
         <a>취소</a>
     </form>

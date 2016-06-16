@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8"/>
     <title>댓글화면</title>
+
 </head>
 <body>
     <header th:include="fragment/header :: header"></header>
 
-    <table>
+    <table class = "table">
         <tbody id="comments">
 
         </tbody>
     </table>
 
-    <button id="moreData">10개 더보기</button>
+    <button id="moreData" class="btn btn-default btn-lg btn-block">10개 더보기</button>
 
     <script th:src="@{static/js/comment.js}"></script>
     <script>

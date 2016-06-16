@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
             }
         }
 
-        session.setAttribute("login", null);
+        session.setAttribute("login", "fail");
         return "signin";
     }
 
