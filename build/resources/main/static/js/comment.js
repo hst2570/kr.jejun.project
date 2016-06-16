@@ -75,12 +75,12 @@ function getData(){
        var second = 1000;
 
        var temp = ((x/1000)/60);
-       if(temp > 59){
+       if(temp > 1440){
+        temp = parseInt((temp/60)/24)+"일 전";
+       }else if(temp > 59 && temp < 1440){
         temp = parseInt(temp/60)+"시간 전";
        }else if(temp <= 59){
         temp = parseInt(temp)+"분 전";
-       }else if(temp > 1440){
-        temp = nMSec.getDate();
        }
 
        return temp;
